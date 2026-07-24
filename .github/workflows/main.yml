@@ -1,4 +1,4 @@
-name: My First Workflow
+name: Multiple Jobs Demo
 
 on:
   push:
@@ -6,11 +6,33 @@ on:
       - main
 
 jobs:
-  hello:
+
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Print Message
-        run: echo "Hello Satish! Welcome to GitHub Actions."
+      - uses: actions/checkout@v4
+
+      - name: Build Started
+        run: echo "Building Application..."
+
+      - name: Show Files
+        run: ls -la
+
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Testing
+        run: echo "Running Tests..."
+
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy
+        run: echo "Deploying Application..."
 
 
