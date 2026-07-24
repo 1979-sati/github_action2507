@@ -1,38 +1,28 @@
-name: Multiple Jobs Demo
+name: Variables Demo
 
 on:
   push:
     branches:
       - main
 
+env:
+  APP_NAME: Terraform-App
+  ENVIRONMENT: Dev
+  VERSION: 1.0
+
 jobs:
 
-  build:
+  demo:
     runs-on: ubuntu-latest
 
     steps:
+
       - uses: actions/checkout@v4
 
-      - name: Build Started
-        run: echo "Building Application..."
-
-      - name: Show Files
-        run: ls -la
-
-  test:
-    needs: build
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Testing
-        run: echo "Running Tests..."
-
-  deploy:
-    needs: test
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Deploy
-        run: echo "Deploying Application..."
+      - name: Show Variables
+        run: |
+          echo "Application : $APP_NAME"
+          echo "Environment : $ENVIRONMENT"
+          echo "Version : $VERSION"
 
 
