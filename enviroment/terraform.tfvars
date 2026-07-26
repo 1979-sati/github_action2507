@@ -3,6 +3,10 @@ resource_groups = {
     name     = "rg_dev"
     location = "centralindia"
   }
+   rg1 = {
+    name     = "rg_dev1"
+    location = "centralindia"
+  }
   
 
 }
